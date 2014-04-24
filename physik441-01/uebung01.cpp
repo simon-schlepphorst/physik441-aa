@@ -16,8 +16,9 @@
 
 int main() {
 
-//  int i;
+  int i;
+  i = 10;
   std::cout << "Hallo Welt" << std::endl;
-
+  std::cout << "i ist " << i << std::endl;
 }
 
