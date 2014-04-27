@@ -3,6 +3,10 @@
  * Simon Schlepphorst
  */
 
+/**
+ * \file
+ */
+
 #include <stdio.h>
 
 /**
