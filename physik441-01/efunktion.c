@@ -5,10 +5,11 @@
 
 #include <stdio.h>
 
-/*
+/**
  * Taylorreihe der e-Funktion
- * n := max Element der Reihe
- * x := Entwicklungspunkt
+ *
+ * \param[in] n Ordnung der Entwicklung
+ * \param[in] x Entwicklungspunkt
  */
 
 double efunc (int n, double x){
