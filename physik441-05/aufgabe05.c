@@ -57,13 +57,13 @@ double trapez(const double low, const double high, const int n, double (*f) (con
 double simpson(const double low, const double high, const int n, double (*f) (const double)) {
 	double h = (high - low) / (double) n;
 	double tmp_erg = f(low) + f(high);
-	double tmp1;
 	double tmp = low;
-	for (int i = 1; i < n; i++){
+	for (int i = 1; i < n - 2; i += 2){
 		tmp += h;
-		tmp1 = (i %2) ? 4. : 2.;
-		tmp_erg += tmp1 * f(tmp);
+		tmp_erg += 4 * f(tmp) + 2 * f(tmp + h);
+		tmp += h;
 	}
+	tmp_erg += 4 * f(tmp + h);
 	return h * tmp_erg / 3;
 }
 
