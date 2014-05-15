@@ -31,11 +31,11 @@ double f3(const double x) {
  * Output: Ableitung an der Stelle x
  */
 double twopoint(const double x, const double h, double (*f) (const double)) {
-  return 1.;
+	return (f(x + h) - f(x)) / h;
 }
 
 double threepoint(const double x, const double h, double (*f) (const double)) {
-  return 1.;
+	return (f(x + h) - f(x - h)) / (2 * h);
 }
 
 /*
