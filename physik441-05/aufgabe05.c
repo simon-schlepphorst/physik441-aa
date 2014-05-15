@@ -1,7 +1,8 @@
 /**
- * Loesungsbeispiele fuer Ableitungen
- * und Integration von verschiedenen
- * Funktionen
+ * LÖsungsbeispiele fÜr Ableitungen und Integration 
+ * von verschiedenen Funktionen
+ *
+ * Bearbeitet von Simon Schlepphorst
  * 
  * gcc aufgabe05.c -o der_int -Wall -pedantic -lm -std=gnu99
  **/
