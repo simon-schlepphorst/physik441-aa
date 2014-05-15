@@ -14,15 +14,15 @@
  * Testfunktionen
  */
 double f1(const double x) {
-  return 1.;
+	return sin(x);
 }
 
 double f2(const double x) {
-  return 1.;
+	return exp(-0.5 * x * x);
 }
 
 double f3(const double x) {
-  return 1.;
+	return log(x);
 }
 
 /*
