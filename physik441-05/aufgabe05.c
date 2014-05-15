@@ -54,8 +54,17 @@ double trapez(const double low, const double high, const int n, double (*f) (con
 	return h * tmp_erg / 2;
 }
 
-double simpson(const double low, const double high, const int n_) {
-  return 1.;
+double simpson(const double low, const double high, const int n, double (*f) (const double)) {
+	double h = (high - low) / (double) n;
+	double tmp_erg = f(low) + f(high);
+	double tmp1;
+	double tmp = low;
+	for (int i = 1; i < n; i++){
+		tmp += h;
+		tmp1 = (i %2) ? 4. : 2.;
+		tmp_erg += tmp1 * f(tmp);
+	}
+	return h * tmp_erg / 3;
 }
 
 int main() {
@@ -126,7 +135,7 @@ int main() {
     h = (high - low) / (double) n;
     printf("%i %.6f\t%7.5f (%7.5f)\t%7.5f (%7.5f)\n", n, h,
       trapez(low, high, n, f1), fabs(trapez(low, high, n, f1) - 1.),
-      simpson(low, high, n), fabs(simpson(low, high, n) - 1.) );
+      simpson(low, high, n, f1), fabs(simpson(low, high, n, f1) - 1.) );
   }
 
   return 0;
