@@ -3,7 +3,7 @@
  * und Integration von verschiedenen
  * Funktionen
  * 
- * gcc aufgabe05.c -o der_int -Wall -pedantic -lm
+ * gcc aufgabe05.c -o der_int -Wall -pedantic -lm -std=gnu99
  **/
 
 #include <stdio.h>
@@ -43,8 +43,15 @@ double threepoint(const double x, const double h, double (*f) (const double)) {
  * Input: Intervall low-high, Anzahl der Stuetzstellen n
  * Output: Integral der Funktion f1 im Intervall low-high
  */
-double trapez(const double low, const double high, const int n) {
-  return 1.;
+double trapez(const double low, const double high, const int n, double (*f) (const double)) {
+	double h = (high - low) / (double) n;
+	double tmp_erg = f(low) + f(high);
+	double tmp = low;
+	for (int i = 1; i < n; i++){
+		tmp += h;
+		tmp_erg += 2 * f(tmp);
+	}	
+	return h * tmp_erg / 2;
 }
 
 double simpson(const double low, const double high, const int n_) {
@@ -98,14 +105,14 @@ int main() {
     /* Scan durch verschiedene h */
     for(h = 0.1; h > 0.000001; h /= 10.) {
       printf("f2: %f %.6f\t%7.5f (%7.5f)\t%7.5f (%7.5f)\n", xs[i], h,
-          twopoint(xs[i], h, f2), fabs(twopoint(xs[i], h, f2) - genau[i]) / genau[i],
-          threepoint(xs[i], h, f2), fabs(threepoint(xs[i], h, f2) - genau[i]) / genau[i]);
+          twopoint(xs[i], h, f2), fabs(twopoint(xs[i], h, f2) - genau[i + 3]) / genau[i + 3],
+          threepoint(xs[i], h, f2), fabs(threepoint(xs[i], h, f2) - genau[i + 3]) / genau[i + 3]);
     }
     /* Scan durch verschiedene h */
     for(h = 0.1; h > 0.000001; h /= 10.) {
       printf("f3: %f %.6f\t%7.5f (%7.5f)\t%7.5f (%7.5f)\n", xs[i], h,
-          twopoint(xs[i], h, f3), fabs(twopoint(xs[i], h, f3) - genau[i]) / genau[i],
-          threepoint(xs[i], h, f3), fabs(threepoint(xs[i], h, f3) - genau[i]) / genau[i]);
+          twopoint(xs[i], h, f3), fabs(twopoint(xs[i], h, f3) - genau[i + 6]) / genau[i + 6],
+          threepoint(xs[i], h, f3), fabs(threepoint(xs[i], h, f3) - genau[i + 6]) / genau[i + 6]);
     }
   }
 
@@ -118,10 +125,9 @@ int main() {
   for(n = 10; n < 1.e6; n *= 2) {
     h = (high - low) / (double) n;
     printf("%i %.6f\t%7.5f (%7.5f)\t%7.5f (%7.5f)\n", n, h,
-      trapez(low, high, n), fabs(trapez(low, high, n) - 1.),
+      trapez(low, high, n, f1), fabs(trapez(low, high, n, f1) - 1.),
       simpson(low, high, n), fabs(simpson(low, high, n) - 1.) );
   }
 
   return 0;
 }
-
