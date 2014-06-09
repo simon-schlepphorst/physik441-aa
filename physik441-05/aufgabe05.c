@@ -4,7 +4,7 @@
  *
  * Bearbeitet von Simon Schlepphorst
  * 
- * gcc aufgabe05.c -o der_int -Wall -pedantic -lm -std=gnu99
+ * gcc aufgabe05.c -Wall -pedantic -lm -std=gnu99
  **/
 
 #include <stdio.h>
